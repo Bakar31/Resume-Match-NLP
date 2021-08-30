@@ -9,6 +9,9 @@ def get_info(path):
     print("Document Creator: ", info.creator)
     print("Document Producer: ", info.producer)
     print("Document Title: ", info.title)
+    print("Number of pages: ", pdf.getNumPages())
+    print("Page Layout: ", pdf.getPageLayout())
+    print("Encrypted: ", pdf.isEncrypted)
 
 path = "dataset/trainResumes/candidate_002.pdf"
 get_info(path)
