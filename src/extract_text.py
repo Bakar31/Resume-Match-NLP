@@ -18,7 +18,7 @@ def pdf2string(path, resumes):
         main_path = path+i
         text = high_level.extract_text(main_path)
         str_list = text.split()
-        str_list = str_list[25:]
+        str_list = str_list[:]
         string = ' '.join(str_list)
         resumes.append(string)
 
