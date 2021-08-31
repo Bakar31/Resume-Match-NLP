@@ -21,3 +21,10 @@ def pdf2string(path, resumes):
         str_list = str_list[25:]
         string = ' '.join(str_list)
         resumes.append(string)
+
+pdf2string(train_path, train_resumes)
+pdf2string(test_path, test_resumes)
+
+print(train_resumes[0])
+print('==================')
+print(test_resumes[0])
