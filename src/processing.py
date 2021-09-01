@@ -38,4 +38,3 @@ def text_processing(resume):
 
     main_text = ' '.join(Stem_words)
     return main_text
-

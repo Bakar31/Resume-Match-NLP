@@ -18,3 +18,5 @@ print(len(processed_resumes_test))
 print(processed_resumes_train[0])
 print(processed_resumes_test[0])
 
+train = pd.read_csv('dataset/train.csv')
+test = pd.read_csv('dataset/test.csv')
