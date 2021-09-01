@@ -8,6 +8,7 @@ punctuations = list('''!()-[]{};:'"\,<>./?@#$%^&*_~''')
 
 def text_processing(resume):   
 
+    resume = nlp(resume)
     token_list = []
     for token in resume:
         token_list.append(token.text)
@@ -34,5 +35,7 @@ def text_processing(resume):
     doc = nlp(sentence)
     for word in doc:
         Stem_words.append(word.lemma_)
-    return Stem_words
+
+    main_text = ' '.join(Stem_words)
+    return main_text
 
