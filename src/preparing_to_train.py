@@ -1,3 +1,4 @@
+import typing_extensions
 import pandas as pd
 from extract_text import train_resumes, test_resumes
 from processing import text_processing
@@ -20,3 +21,15 @@ print(processed_resumes_test[0])
 
 train = pd.read_csv('dataset/train.csv')
 test = pd.read_csv('dataset/test.csv')
+
+def dataframe(resume_list, df):
+    resumes =  pd.DataFrame(resume_list, columns = ['resumes'])
+    dataframe = pd.concat([df, resumes], axis = 1)
+    dataframe.drop('CandidateID', axis = 1, inplace = True)
+    return dataframe
+
+train_df = dataframe(processed_resumes_train, train)
+test_df = dataframe(processed_resumes_test, test)
+
+print(train_df.head())
+print(test_df.head())
