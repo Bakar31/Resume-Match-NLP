@@ -29,18 +29,6 @@ text_vectorizer = TextVectorization(max_tokens=max_vocab_length,
 text_vectorizer.adapt(x)
 text_vectorizer.adapt(test_sentences)
 
-embedding = layers.Embedding(input_dim=max_vocab_length,
-                             output_dim=128, 
-                             embeddings_initializer="uniform",
-                             input_length=max_length)
-
-embedding(text_vectorizer(x))
-embedding(text_vectorizer(test_sentences))
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestRegressor
-
 model = Pipeline([
                     ("tfidf", TfidfVectorizer()), 
                     ("reg", RandomForestRegressor())

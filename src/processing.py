@@ -37,4 +37,5 @@ def text_processing(resume):
         Stem_words.append(word.lemma_)
 
     main_text = ' '.join(Stem_words)
+    main_text = main_text.lower()
     return main_text
