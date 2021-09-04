@@ -20,6 +20,7 @@ xgb = XGB.XGBRegressor(learning_rate=0.01,
                         n_estimators=100, 
                         random_state = 31).fit(x, y)
 
+
 def submission(model, test):
     test1 = pd.read_csv('dataset/test.csv')
     preds = model.predict(test)
