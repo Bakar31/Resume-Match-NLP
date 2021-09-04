@@ -11,10 +11,13 @@ test_df = pd.concat([test, pd.DataFrame(test_lemma, columns=['resumes'])], axis 
 print(train_df.head())
 print(test_df.head())
 
-tfidf = TfidfVectorizer(min_df=3,  max_features=None, 
-            strip_accents='unicode', analyzer='word',token_pattern=r'\w{1,}',
-            ngram_range=(1, 3), use_idf=1,smooth_idf=1,sublinear_tf=1,
-            stop_words = 'english')
+tfidf = TfidfVectorizer(max_features=10000, 
+                        strip_accents='unicode', 
+                        analyzer='word',
+                        lowercase=False,
+                        ngram_range=(1, 1), 
+                        stop_words = 'english')
+
 tfidf_matrix_train = tfidf.fit_transform(train_df['resumes'])
 tfidf_matrix_test = tfidf.transform(test_df['resumes'])
 print(tfidf_matrix_train.shape)
