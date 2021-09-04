@@ -1,33 +1,14 @@
-import spacy
-from spacy.lang.en.stop_words import STOP_WORDS
-nlp = spacy.load('en_core_web_sm')
+from extract_text import train_resumes, test_resumes
 
-punctuations = list('''!()-[]{};:'"\,<>./?@#$%^&*_~''')
+train_resumes_lower = []
+for resume in train_resumes:
+    train_resumes_lower.append(resume.lower())
 
-def text_processing(resume):   
 
-    resume = nlp(resume)
-    token_list = []
-    for token in resume:
-        token_list.append(token.text)
+test_resumes_lower = []
+for resume in test_resumes:
+    test_resumes_lower.append(resume.lower())
 
-    filtered_sentence =[] 
-    for word in token_list:
-        lexeme = nlp.vocab[word]
-        if lexeme.is_stop == False:
-            filtered_sentence.append(word) 
-
-    filtered_sentence_2 = []
-    for word in filtered_sentence:
-        if word not in punctuations:
-            filtered_sentence_2.append(word)
-    
-    Stem_words = []
-    sentence = ' '.join(filtered_sentence_2)
-    doc = nlp(sentence)
-    for word in doc:
-        Stem_words.append(word.lemma_)
-
-    main_text = ' '.join(Stem_words)
-    main_text = main_text.lower()
-    return main_text
+print(train_resumes_lower[0])
+print('===========')
+print(test_resumes_lower[0])
