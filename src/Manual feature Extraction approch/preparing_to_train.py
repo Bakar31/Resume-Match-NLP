@@ -15,7 +15,8 @@ for resume in test_resumes:
 
 print(len(processed_resumes_train))
 print(len(processed_resumes_test))
-print(processed_resumes_train[1])
+print(processed_resumes_train[0])
+print('==================')
 print(processed_resumes_test[0])
 
 def dataframe(resume_list, df):

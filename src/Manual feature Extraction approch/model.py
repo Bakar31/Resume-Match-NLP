@@ -1,5 +1,4 @@
 from features import train_df, test_df
-import pandas as pd
 
 train_df.drop('resumes', axis = 1, inplace=True)
 test_df.drop('resumes', axis = 1, inplace=True)
