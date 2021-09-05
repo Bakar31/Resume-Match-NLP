@@ -1,9 +1,8 @@
 # required libraries
-import os
 import pandas as pd
-import numpy as np
 from pdfminer import high_level
 
+# csv files
 train = pd.read_csv('dataset/train.csv')
 test = pd.read_csv('dataset/test.csv')
 
