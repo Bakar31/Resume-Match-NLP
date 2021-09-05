@@ -8,6 +8,6 @@ def submission(model, test_sentences):
     sub_df = pd.concat([test1, prediction], axis = 1)
     return sub_df
 
-sub = submission(rf, test_df)
+sub = submission(xgb, test_df)
 sub.to_csv('submission file/Manual feature submission.csv')
 print(sub.head())
