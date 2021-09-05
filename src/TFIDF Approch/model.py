@@ -37,5 +37,5 @@ def submission(model, test_sentences):
 
 # predinting with xgboost model
 sub = submission(xgb, tfidf_matrix_test)
-sub.to_csv('submission file/xgb sym.csv')
+sub.to_csv('submission file/xgb sub.csv')
 print(sub.head())
