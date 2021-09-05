@@ -1,5 +1,5 @@
 import pandas as pd
-from model import rf, test_df
+from model import xgb, test_df
 
 def submission(model, test_sentences):
     test1 = pd.read_csv('dataset/test.csv')
