@@ -9,5 +9,5 @@ def submission(model, test_sentences):
     return sub_df
 
 sub = submission(rf, test_df)
-sub.to_csv('submission file/Submission-4.csv')
+sub.to_csv('submission file/Manual feature submission.csv')
 print(sub.head())
