@@ -1,5 +1,9 @@
 # required libraries
+import numpy as np
+import pandas as pd
+import re
 import nltk
+import spacy
 import string
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet
@@ -17,13 +21,13 @@ def remove_single_word(text):
 
 train_resumes_str = []
 for resume in train_resumes:
-    string = remove_single_word(resume)
-    train_resumes_str.append(string)
+    strings = remove_single_word(resume)
+    train_resumes_str.append(strings)
 
 test_resumes_str = []
 for resume in test_resumes:
-    string = remove_single_word(resume)
-    test_resumes_str.append(string)
+    strings = remove_single_word(resume)
+    test_resumes_str.append(strings)
 #=================================================================================
 
 # lowercasing all letters
@@ -37,9 +41,8 @@ for resume in test_resumes_str:
 #=================================================================================
 
 # Punctuation removal
-PUNCT_TO_REMOVE = string.punctuation
 def remove_punctuation(text):
-    return text.translate(str.maketrans('', '', PUNCT_TO_REMOVE))
+    return text.translate(str.maketrans('', '', string.punctuation))
 
 train_punc_removed = []
 for resume in train_resumes_lower:
