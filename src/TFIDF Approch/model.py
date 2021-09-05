@@ -1,31 +1,33 @@
-from nltk.corpus.reader.bracket_parse import CategorizedBracketParseCorpusReader
-from sklearn.ensemble import RandomForestRegressor
+# required libraries
 import pandas as pd
+from lightgbm import LGBMRegressor
+import xgboost as XGB
 from tfidf import tfidf_matrix_train, tfidf_matrix_test, train_df
 
+# dependent features
 y = train_df['Match Percentage']
-#rf = RandomForestRegressor().fit(tfidf_matrix_train, y)
 
-from sklearn.ensemble import GradientBoostingRegressor
-'''gbr_reg = GradientBoostingRegressor(n_estimators=1000, 
-                                    learning_rate=0.01, 
-                                    max_depth=1, random_state=31).fit(tfidf_matrix_train, y)'''
-
-import xgboost as XGB
-'''xgb = XGB.XGBRegressor(learning_rate=0.005, 
+# XGBoost model
+xgb = XGB.XGBRegressor(learning_rate=0.005, 
                         n_estimators=700, 
                         objective='reg:squarederror', 
                         max_depth=8, 
-                        random_state = 31).fit(tfidf_matrix_train, y)'''
-
-from lightgbm import LGBMRegressor
-#lgmb = LGBMRegressor().fit(tfidf_matrix_train, y)
-
-from catboost import CatBoostRegressor
-cat = CatBoostRegressor().fit(tfidf_matrix_train, y)
+                        reg_lambda = 1.3,
+                        gamma = 1,
+                        min_child_weight =1.5,
+                        max_delta_step = 100,
+                        random_state = 31).fit(tfidf_matrix_train, y)
 
 
+# LightBGM model
+lgbm = LGBMRegressor(num_leaves=31,
+                    learning_rate = 0.01,
+                    n_estimators = 1000,
+                    reg_lambda = 2.5,
+                    reg_alpha = 2,
+                    random_state=31).fit(tfidf_matrix_train, y)
 
+# prediction and submission file creation
 def submission(model, test_sentences):
     test1 = pd.read_csv('dataset/test.csv')
     preds = model.predict(test_sentences)
@@ -33,6 +35,7 @@ def submission(model, test_sentences):
     sub_df = pd.concat([test1, prediction], axis = 1)
     return sub_df
 
-sub = submission(cat, tfidf_matrix_test)
-sub.to_csv('submission file/Submission-21.csv')
+# predinting with xgboost model
+sub = submission(xgb, tfidf_matrix_test)
+sub.to_csv('submission file/xgb sym.csv')
 print(sub.head())
