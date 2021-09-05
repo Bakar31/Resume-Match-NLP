@@ -43,6 +43,6 @@ def pdf2string_test(path, test_ids, resumes):
 pdf2string_train(train_path, ids, train_resumes)
 pdf2string_test(test_path,  test_ids, test_resumes)
 
-'''print(train_resumes[0])
+print(train_resumes[0])
 print('==================')
-print(test_resumes[0])'''
+print(test_resumes[0])
