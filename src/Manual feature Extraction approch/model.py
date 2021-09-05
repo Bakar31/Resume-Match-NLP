@@ -6,6 +6,7 @@ test_df.drop('resumes', axis = 1, inplace=True)
 
 x = train_df.drop('Match Percentage', axis = 1)
 y = train_df['Match Percentage']
+print(x.head())
 
 # xgboost regressior
 xgb = XGB.XGBRegressor(learning_rate=0.005, 
