@@ -14,10 +14,9 @@ test_df = pd.concat([test, pd.DataFrame(test_lemma, columns=['resumes'])], axis 
 print(train_df.head())
 print(test_df.head())
 
-# apply TFIDF
+# apply CountVectorizer
 countvec = CountVectorizer(analyzer='word',
-                        token_pattern=r'\w{1,}',
-                        ngram_range=(1, 3), 
+                        ngram_range=(1, 1), 
                         stop_words = 'english')
 
 countvec_matrix_train = countvec.fit_transform(train_df['resumes'])

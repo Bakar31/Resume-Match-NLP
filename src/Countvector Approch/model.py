@@ -8,21 +8,17 @@ from countvec import countvec_matrix_train, countvec_matrix_test, train_df
 y = train_df['Match Percentage']
 
 # XGBoost model
-xgb = XGB.XGBRegressor(learning_rate=0.005, 
-                        n_estimators=700, 
-                        objective='reg:squarederror', 
-                        max_depth=8, 
-                        reg_lambda = 1.3,
-                        gamma = 1,
-                        min_child_weight =1.5,
-                        max_delta_step = 100,
+xgb = XGB.XGBRegressor(learning_rate=0.3,
+                        n_estimators=200,
+                        max_depth=7,
+                        max_delta_step = 50,
                         random_state = 31).fit(countvec_matrix_train, y)
 
 # turning to float for lgbm
 countvec_matrix_train = countvec_matrix_train.astype('float32')
 countvec_matrix_test = countvec_matrix_test.astype('float32')
 
-# LightBGM model
+# LightBGM model (Best Model)
 lgbm = LGBMRegressor(num_leaves=31,
                     learning_rate = 0.2,
                     n_estimators = 200,
