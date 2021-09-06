@@ -2,7 +2,7 @@
 import pandas as pd
 from lightgbm import LGBMRegressor
 import xgboost as XGB
-from tfidf import tfidf_matrix_train, tfidf_matrix_test, train_df
+from countvec import countvec_matrix_train, countvec_matrix_test, train_df
 
 # dependent features
 y = train_df['Match Percentage']
@@ -16,16 +16,18 @@ xgb = XGB.XGBRegressor(learning_rate=0.005,
                         gamma = 1,
                         min_child_weight =1.5,
                         max_delta_step = 100,
-                        random_state = 31).fit(tfidf_matrix_train, y)
+                        random_state = 31).fit(countvec_matrix_train, y)
 
+# turning to float for lgbm
+countvec_matrix_train = countvec_matrix_train.astype('float32')
+countvec_matrix_test = countvec_matrix_test.astype('float32')
 
 # LightBGM model
 lgbm = LGBMRegressor(num_leaves=31,
-                    learning_rate = 0.01,
-                    n_estimators = 1000,
-                    reg_lambda = 2.5,
-                    reg_alpha = 2,
-                    random_state=31).fit(tfidf_matrix_train, y)
+                    learning_rate = 0.2,
+                    n_estimators = 200,
+                    reg_alpha = 1,
+                    random_state=31).fit(countvec_matrix_train, y)
 
 # prediction and submission file creation
 def submission(model, test_sentences):
@@ -36,6 +38,6 @@ def submission(model, test_sentences):
     return sub_df
 
 # predinting with xgboost model
-sub = submission(xgb, tfidf_matrix_test)
-sub.to_csv('submission file/xgb sub.csv')
+sub = submission(xgb, countvec_matrix_test)
+sub.to_csv('submission file/lgbm countvec best.csv')
 print(sub.head())
