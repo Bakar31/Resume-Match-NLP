@@ -17,3 +17,6 @@
 
 ## Evaluation metric:
 score = 100*max(0, 1 - metrics.mean_squared_log_error(actual, predicted))
+
+## Best Model:
+LightBGM algorithm with counvectorized data has the highest score.
